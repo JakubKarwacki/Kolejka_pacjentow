@@ -8,6 +8,7 @@ Zadanie 1: Kolejka Pacjentów - FIFO
     #include <stdio.h>
 
 // Variables
+    #define Path_to_generation_data "../../Dane_generacyjne/"
 
 // Structures
 
