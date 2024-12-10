@@ -7,9 +7,16 @@ Zadanie 1: Kolejka Pacjentów - FIFO
 // Libraries
     #include <stdio.h>
     #include <stdlib.h>
+    #include <windows.h>
+    #include <time.h>
 
 // Variables
 int choice = 0;
+int PESEL_index = 0;
+int r_year, r_month;
+int temp;
+
+SYSTEMTIME t;
 
 // Structures
     typedef struct GenerationData
@@ -18,19 +25,20 @@ int choice = 0;
         struct GenerationData *previouse;
     } GenerationData;
 
-    typedef struct FIFO
+    typedef struct Patient
     {
         char name[20];
         char surname[20];
         char PESEL[11];
-        struct FIFO *prev;
-    } FIFO;
+        struct Patient *previouse;
+    } Patient;
 
     // Structure variables
-    GenerationData *head = NULL;
+    GenerationData *generationHead = NULL;
+    Patient *patientHead = NULL;
 
 
 // Functions
     int loadData(char filename[11], GenerationData **head); 
-    int addPatient();
+    int addPatient(Patient **head);
     int mainMenu();
