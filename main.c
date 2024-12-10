@@ -8,14 +8,39 @@ Zadanie 1: Kolejka Pacjentów - FIFO
     #include "main.h"
 
 // Functions
+    int loadData(char *filename, GenerationData **head) {
+        GenerationData *node = (GenerationData *) malloc(sizeof(GenerationData));
+        char temp[21];
+
+        FILE *file = fopen(filename, "r");
+        if(file == NULL)
+        {
+            printf("Error!\n");
+            return 1;
+        }
+        
+        while (fscanf(file, "%s", &temp) != EOF){
+            for (int i = 0; i < sizeof(temp); i++)
+            {
+                node->value[i] = temp[i];
+            }
+            node->previouse = *head;
+            *head = node;
+
+            printf("%s\n", node->value);
+        }
+        fclose(file);
+
+        *head = NULL;
+        return 0;
+    }
+
     int addPatient() {
 
         return 0;
     }
 
-    int main() {
-        int choice = 0;
-
+    int mainMenu() {
         printf("%s %s %s %s %s %s",
                 "Menu:\n",
                 "1. Dodaj pacjenta\n",
@@ -25,6 +50,20 @@ Zadanie 1: Kolejka Pacjentów - FIFO
                 "0. Wyjdz\n"
             );
 
+        return 0;
+    }
+
+    int main() {
+        // Data loading
+        loadData("data/M_names.txt", &head);
+        loadData("data/M_surnames.csv", &head);
+        loadData("data/F_names.csv", &head);
+        loadData("data/F_surnames.csv", &head);
+
+        // Menu - initialization
+        mainMenu();
+
+        // Menu - user choice loop
         do
         {
             printf("\n:> ");
@@ -32,7 +71,7 @@ Zadanie 1: Kolejka Pacjentów - FIFO
 
             switch (choice) {
                 case 1:
-                    addPatient();
+                    //addPatient();
                     printf(": Dodano pacjenta!\n");
                     break;
                 case 2:
